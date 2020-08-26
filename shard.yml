@@ -1,0 +1,13 @@
+name: crystal_encryption
+version: 0.1.0
+
+authors:
+  - Mia Iversen <mia@chillfox.com>
+
+targets:
+  crystal_encryption:
+    main: src/crystal_encryption.cr
+
+crystal: 0.35.1
+
+license: MIT
