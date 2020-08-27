@@ -8,11 +8,14 @@ def key_derivation(password, salt)
   OpenSSL::PKCS5.pbkdf2_hmac(password, salt, 100_000, OpenSSL::Algorithm::SHA256, 32)
 end
 
+# "aes-256-gcm" vs "aes-256-cbc"
+# gcm checks data integrity, cbc does not.
 
 def encrypt(data, key)
   iv = Random::Secure.random_bytes(32)
 
-  cipher = OpenSSL::Cipher.new("aes-256-gcm")
+  cipher = OpenSSL::Cipher.new("aes-256-cbc") # working
+  # cipher = OpenSSL::Cipher.new("aes-256-gcm") # broken
   cipher.encrypt
   cipher.key = key
   cipher.iv = iv
@@ -28,7 +31,8 @@ end
 
 
 def decrypt(data, key)
-  cipher = OpenSSL::Cipher.new("aes-256-gcm")
+  cipher = OpenSSL::Cipher.new("aes-256-cbc") # working
+  # cipher = OpenSSL::Cipher.new("aes-256-gcm") # broken
   cipher.decrypt
   cipher.key = key
   cipher.iv = data[0, 32]
@@ -54,6 +58,7 @@ key = key_derivation password, salt
 encrypted_data = encrypt data, key
 puts "Encrypted data: #{encrypted_data.to_s}"
 puts "--------------------"
+# encrypted_data[33] = 1 # data corruption
 decrypted_data = decrypt encrypted_data, key
 puts "Decrypted data: #{decrypted_data.to_s}"
 
