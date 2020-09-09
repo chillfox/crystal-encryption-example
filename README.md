@@ -1,6 +1,6 @@
 # Crystal Encryption Example
 
-Currently not working...
+Example of how to do encryption in Crystal using OpenSSL aes-256-cbc.
 
 
 ## references

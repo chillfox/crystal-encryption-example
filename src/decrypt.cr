@@ -10,8 +10,8 @@ key = OpenSSL::PKCS5.pbkdf2_hmac(password, salt, 100_000, OpenSSL::Algorithm::SH
 
 
 data += 32
-# cipher = OpenSSL::Cipher.new("aes-256-cbc")
-cipher = OpenSSL::Cipher.new("aes-256-gcm")
+cipher = OpenSSL::Cipher.new("aes-256-cbc")
+# cipher = OpenSSL::Cipher.new("aes-256-gcm")
 cipher.decrypt
 cipher.key = key
 cipher.iv = data[0, 32]

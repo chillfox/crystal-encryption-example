@@ -11,8 +11,8 @@ key = OpenSSL::PKCS5.pbkdf2_hmac(password, salt, 100_000, OpenSSL::Algorithm::SH
 
 iv = Random::Secure.random_bytes(32)
 
-# cipher = OpenSSL::Cipher.new("aes-256-cbc")
-cipher = OpenSSL::Cipher.new("aes-256-gcm")
+cipher = OpenSSL::Cipher.new("aes-256-cbc")
+# cipher = OpenSSL::Cipher.new("aes-256-gcm")
 cipher.encrypt
 cipher.key = key
 cipher.iv = iv
